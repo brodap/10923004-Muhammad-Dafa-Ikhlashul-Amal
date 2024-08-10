@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Form and Invoice</title>
+    <style>
+        body {
+            background-image: url('bg.png');
+            background-size: cover;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            font-size: 40px;
+        }
+        h3 {
+            font-size: 30px;
+        }
+        table {
+            margin: 0 auto;
+            font-size: 18px;
+        }
+        .invoice {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: 20px auto;
+            text-align: left;
+        }
+        .invoice td {
+            padding: 5px;
+        }
+        input[type=text], textarea, select {
+            width: 100%;
+            padding: 5px;
+        }
+        input[type=submit] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <center><h2>SERVICE</h2></center>
+    <center><h3><b>TOLONG ISI DATA</b></h3></center>
+    
+    <form name="form" onsubmit="return generateInvoice();">
+        <center><table></center>
+            <tr>
+                <td> Nama </td>
+                <td> <input type="text" name="nama" size="30" required></td>
+            </tr>
+            <tr>
+                <td> Nomor Telepon </td>
+                <td> <input type="text" name="nomor" size="30" required></td>
+            </tr>
+            <tr>
+                <td> Jenis Kamera </td>
+                <td> <input type="text" name="kamera" size="30" required></td>
+            </tr>
+            <tr>
+                <td> Detail Permasalahan </td>
+                <td> <textarea name="permasalahan" cols="50" rows="11" required></textarea></td>
+            </tr>
+            <tr>
+                <td> Metode Pembayaran </td>
+                <td> 
+                    <select name="metode" required>
+                        <option value="COD (Bayar di Tempat)">COD (Bayar di Tempat)</option>
+                        <option value="Dana">Dana</option>
+                        <option value="ShopeePay">ShopeePay</option>
+                        <option value="Bank BCA">Bank BCA</option>
+                        <option value="Bank Mandiri">Bank Mandiri</option>
+                        <option value="Bank BNI">Bank BNI</option>
+                        <option value="Bank BRI">Bank BRI</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <center>
+            <input type="submit" value="Kirim">
+            <input type="reset" value="Reset" onclick="resetInvoice();">
+        </center>
+    </form>
+
+    <div class="invoice" id="invoice" style="display:none;">
+        <h2>Invoice</h2>
+        <table>
+            <tr><td>Nama:</td><td id="invoiceNama"></td></tr>
+            <tr><td>Nomor Telepon:</td><td id="invoiceNomor"></td></tr>
+            <tr><td>Jenis Kamera:</td><td id="invoiceKamera"></td></tr>
+            <tr><td>Detail Permasalahan:</td><td id="invoicePermasalahan"></td></tr>
+            <tr><td>Metode Pembayaran:</td><td id="invoiceMetode"></td></tr>
+        </table>
+    </div>
+
+    <script>
+        function generateInvoice() {
+            document.getElementById('invoiceNama').innerText = document.forms['form']['nama'].value;
+            document.getElementById('invoiceNomor').innerText = document.forms['form']['nomor'].value;
+            document.getElementById('invoiceKamera').innerText = document.forms['form']['kamera'].value;
+            document.getElementById('invoicePermasalahan').innerText = document.forms['form']['permasalahan'].value;
+            document.getElementById('invoiceMetode').innerText = document.forms['form']['metode'].value;
+
+            document.getElementById('invoice').style.display = 'block';
+
+            return false; // Prevent form submission
+        }
+        function resetInvoice() {
+            document.getElementById('invoice').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
